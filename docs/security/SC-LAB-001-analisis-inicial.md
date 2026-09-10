@@ -14,4 +14,16 @@ No está automáticamente autorizado para cualquier recurso, ya que una cosa es 
 4. **¿Qué control de los propuestos debería definirse desde requisitos o diseño?**
 ¿Por qué? Revisar que cada cosa que alguien pide en verdad le pertenezca antes de mostrársela, porque si esto se deja para el final hay que ir revisando parte por parte del sistema para agregarlo y es fácil que se les pase alguna, mientras que si se piensa desde el diseño queda como una regla que se aplica en todos lados desde el principio. 
 5. **¿Qué activo consideran más crítico y por qué?**
-El activo que consideramos más crítico es la información personal de los estudiantes, como sus perfiles y documentos, ya que es la más fácil de exponer según lo que vimos en los ejemplos, y porque si se filtra afecta la confianza de la gente en el sistema y hasta podría traer problemas legales para la escuela. 
+El activo que consideramos más crítico es la información personal de los estudiantes, como sus perfiles y documentos, ya que es la más fácil de exponer según lo que vimos en los ejemplos, y porque si se filtra afecta la confianza de la gente en el sistema y hasta podría traer problemas legales para la escuela.
+
+## Matriz
+ 
+| Elemento       | Respuesta del equipo | Justificación |
+|----------------|----------------------|---------------|
+| **Activo**     | Información de perfiles de estudiantes (datos personales, académicos). | Es el recurso con valor que debe protegerse: identidad y datos sensibles de cada alumno. |
+| **Amenaza**    | Usuario malintencionado que intenta acceder a información de otros estudiantes. | El actor aprovecha debilidades del sistema para obtener datos que no le corresponden. |
+| **Vulnerabilidad** | Falta de validación de permisos en el acceso a perfiles (Insecure Direct Object Reference). | El sistema permite consultar cualquier perfil cambiando el identificador en la URL, sin verificar si el usuario tiene autorización. |
+| **Ataque**     | Manipulación de la URL para acceder a perfiles ajenos. | Acción concreta: María cambia `/perfil/125` por `/perfil/126` y obtiene información de otro estudiante. |
+| **Impacto**    | Exposición de datos personales y académicos de estudiantes. | Se compromete la confidencialidad y privacidad, lo que puede generar problemas legales y reputacionales. |
+| **Riesgo**     | Alto: probabilidad elevada de explotación y consecuencias críticas. | La vulnerabilidad es fácil de explotar y el impacto es severo (violación de datos). |
+| **Control**    | Validación de permisos en cada consulta, uso de tokens de sesión, pruebas de seguridad (OWASP). | Medidas que previenen el acceso indebido: verificar que el usuario autenticado solo pueda ver su propio perfil. |
