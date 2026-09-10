@@ -16,14 +16,11 @@ No está automáticamente autorizado para cualquier recurso, ya que una cosa es 
 5. **¿Qué activo consideran más crítico y por qué?**
 El activo que consideramos más crítico es la información personal de los estudiantes, como sus perfiles y documentos, ya que es la más fácil de exponer según lo que vimos en los ejemplos, y porque si se filtra afecta la confianza de la gente en el sistema y hasta podría traer problemas legales para la escuela.
 
-## Matriz
+## Matriz Final
  
-| Elemento       | Respuesta del equipo | Justificación |
-|----------------|----------------------|---------------|
-| **Activo**     | Información de perfiles de estudiantes (datos personales, académicos). | Es el recurso con valor que debe protegerse: identidad y datos sensibles de cada alumno. |
-| **Amenaza**    | Usuario malintencionado que intenta acceder a información de otros estudiantes. | El actor aprovecha debilidades del sistema para obtener datos que no le corresponden. |
-| **Vulnerabilidad** | Falta de validación de permisos en el acceso a perfiles (Insecure Direct Object Reference). | El sistema permite consultar cualquier perfil cambiando el identificador en la URL, sin verificar si el usuario tiene autorización. |
-| **Ataque**     | Manipulación de la URL para acceder a perfiles ajenos. | Acción concreta: María cambia `/perfil/125` por `/perfil/126` y obtiene información de otro estudiante. |
-| **Impacto**    | Exposición de datos personales y académicos de estudiantes. | Se compromete la confidencialidad y privacidad, lo que puede generar problemas legales y reputacionales. |
-| **Riesgo**     | Alto: probabilidad elevada de explotación y consecuencias críticas. | La vulnerabilidad es fácil de explotar y el impacto es severo (violación de datos). |
-| **Control**    | Validación de permisos en cada consulta, uso de tokens de sesión, pruebas de seguridad (OWASP). | Medidas que previenen el acceso indebido: verificar que el usuario autenticado solo pueda ver su propio perfil. |
+| Escenario | Activo | Amenaza | Vulnerabilidad | Ataque | Impacto | Control |
+|---|---|---|---|---|---|---|
+| 1. Calificaciones | Registros de calificaciones | Profesor que edita grupos no asignados | Falta de verificación de que el profesor tenga asignación vigente al grupo | Modificación de calificaciones fuera de sus grupos vía manipulación de parámetros | Alteración de registros académicos, pérdida de integridad | Verificar en servidor la asignación profesor–grupo antes de permitir edición; log de auditoría de cambios |
+| 2. Documentos | Documentos personales/académicos | Usuario no autorizado que descarga archivos ajenos | Enlaces de descarga predecibles sin control de acceso (IDOR en documentos) | Enumeración de IDs de documento o reutilización de enlaces | Filtración de información sensible | Autorización por propietario en cada solicitud + enlaces con token temporal firmado |
+| 3. Autenticación | Credenciales y sesiones | Atacante externo intentando comprometer cuentas | Sin límite de intentos de login (permite fuerza bruta/credential stuffing) | Ataque automatizado de prueba masiva de contraseñas | Compromiso de cuenta y acceso a todo lo que ese rol permite | Bloqueo tras intentos fallidos, CAPTCHA, política de contraseñas, MFA |
+| 4. Elección del equipo | Configuración de roles/permisos | Cuenta de administrador comprometida o mal uso interno | Falta de segregación de funciones y auditoría de cambios de rol | Escalamiento de privilegios asignando rol de administrador sin autorización | Control total del sistema por un actor no autorizado | Auditoría obligatoria + doble aprobación para cambios de roles críticos |
