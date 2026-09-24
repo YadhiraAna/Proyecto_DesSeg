@@ -1,4 +1,4 @@
-import sqlite3
+"""import sqlite3
 
 
 def buscar_estudiante(nombre):
@@ -8,18 +8,17 @@ def buscar_estudiante(nombre):
     consulta = (
         "SELECT id, nombre, correo "
         "FROM estudiantes "
-        "WHERE nombre = ?"
+        "WHERE nombre = '" + nombre + "'"
     )
 
-    cursor.execute(consulta, (nombre,))
+    cursor.execute(consulta)
 
     resultado = cursor.fetchall()
     conexion.close()
 
     return resultado
-
-
 nombre = input("Nombre del estudiante: ")
 estudiantes = buscar_estudiante(nombre)
 
 print(estudiantes)
+"""SS
