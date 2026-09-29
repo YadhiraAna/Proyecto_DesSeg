@@ -9,7 +9,7 @@
 
 ## Fecha
 
-28 de septiembre de 2026
+15 de septiembre de 2026
 
 ---
 
@@ -93,15 +93,3 @@ Porque el requisito funcional dice **qué debe hacer** el sistema, no **qué no 
 **¿Qué decisión de su equipo habría sido más barata de corregir antes?**
 
 Definir desde el inicio los **criterios de aceptación de seguridad** de los requisitos (expiración, un solo uso, permisos por rol, reglas de archivos). Escribir esas condiciones cuesta minutos al redactar el requisito; corregirlas ya en pruebas o producción implica rehacer diseño, código, pruebas y despliegue.
-
----
-
-## Flujo de evidencia seguido
-
-1. `git status`
-2. `git diff`
-3. `git add docs/security/SC-LAB-003-shift-left-analysis.md`
-4. `git diff --staged`
-5. `git commit -m "docs: agrega análisis Shift Left SC-LAB-003"`
-6. `git push`
-7. Verificar el archivo en GitHub
