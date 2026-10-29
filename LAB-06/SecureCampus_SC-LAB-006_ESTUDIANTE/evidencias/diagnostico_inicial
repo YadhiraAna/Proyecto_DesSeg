@@ -1,0 +1,46 @@
+.........FFF...                                                          [100%]
+================================== FAILURES ===================================
+____________________ test_professor_other_group_forbidden _____________________
+
+client = <FlaskClient <Flask 'src.app'>>
+
+    def test_professor_other_group_forbidden(client):
+        headers=authenticate(client,'profe_ana')
+>       assert client.put('/grades/4/20',json={'grade':'80'},headers=headers).status_code==403
+E       AssertionError: assert 200 == 403
+E        +  where 200 = <WrapperTestResponse streamed [200 OK]>.status_code
+E        +    where <WrapperTestResponse streamed [200 OK]> = put('/grades/4/20', json={'grade': '80'}, headers={'X-CSRF-Token': 'NHpEuSUTq6g17iiC5al9PsBBVjtHPUdI'})
+E        +      where put = <FlaskClient <Flask 'src.app'>>.put
+
+tests\test_security.py:17: AssertionError
+_________________________ test_student_cannot_modify __________________________
+
+client = <FlaskClient <Flask 'src.app'>>
+
+    def test_student_cannot_modify(client):
+        headers=authenticate(client,'alumna_eli')
+>       assert client.put('/grades/3/10',json={'grade':'99'},headers=headers).status_code==403
+E       AssertionError: assert 200 == 403
+E        +  where 200 = <WrapperTestResponse streamed [200 OK]>.status_code
+E        +    where <WrapperTestResponse streamed [200 OK]> = put('/grades/3/10', json={'grade': '99'}, headers={'X-CSRF-Token': 'QY4wdPNwX2nt5oS5zlpaHQ_utki7xDLR'})
+E        +      where put = <FlaskClient <Flask 'src.app'>>.put
+
+tests\test_security.py:22: AssertionError
+___________________ test_student_cannot_read_other_student ____________________
+
+client = <FlaskClient <Flask 'src.app'>>
+
+    def test_student_cannot_read_other_student(client):
+        authenticate(client,'alumna_eli')
+>       assert client.get('/grades/4/20').status_code==403
+E       AssertionError: assert 200 == 403
+E        +  where 200 = <WrapperTestResponse streamed [200 OK]>.status_code
+E        +    where <WrapperTestResponse streamed [200 OK]> = get('/grades/4/20')
+E        +      where get = <FlaskClient <Flask 'src.app'>>.get
+
+tests\test_security.py:26: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_security.py::test_professor_other_group_forbidden - Asserti...
+FAILED tests/test_security.py::test_student_cannot_modify - AssertionError: a...
+FAILED tests/test_security.py::test_student_cannot_read_other_student - Asser...
+3 failed, 12 passed in 13.20s
