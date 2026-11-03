@@ -19,7 +19,8 @@ from decimal import Decimal, InvalidOperation
 
 from decimal import Decimal, InvalidOperation
 
-
+ # TODO: rechazar valores nulos, booleanos, texto no numérico, NaN, Infinity, fuera de 0..100 y >2 decimales.
+    # No redondear entradas incorrectas.
 def validar_calificacion(valor):
     # Se verifica si el valor es nulo; si es así, se lanza una excepción ValueError.
     if valor is None:
