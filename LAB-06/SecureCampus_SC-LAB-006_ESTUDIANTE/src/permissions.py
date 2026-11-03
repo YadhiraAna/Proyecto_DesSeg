@@ -5,7 +5,7 @@
 #def puede_consultar(user,student_id,group_id,con):
     # TODO: estudiante propio e inscrito, o profesor asignado al grupo con estudiante inscrito.
 #    return True
-
+#Comentario de prueba
 def _inscrito(con, student_id, group_id):
     return con.execute('SELECT 1 FROM enrollments WHERE student_id=? AND group_id=?',
                        (student_id, group_id)).fetchone() is not None
@@ -16,10 +16,11 @@ def _profesor_del_grupo(con, user, group_id):
         (group_id, user['id'])).fetchone() is not None
 
 def puede_modificar(user, student_id, group_id, con):
-    # Solo profesor asignado al grupo Y alumno inscrito. Admin y estudiante: denegado.
+      # TODO: solo profesor asignado al grupo Y estudiante inscrito en él.Admin y estudiante: denegado.
     return _profesor_del_grupo(con, user, group_id) and _inscrito(con, student_id, group_id)
 
 def puede_consultar(user, student_id, group_id, con):
+     # TODO: estudiante propio e inscrito, o profesor asignado al grupo con estudiante inscrito.
     if not _inscrito(con, student_id, group_id):
         return False
     if user['role'] == 'estudiante':
