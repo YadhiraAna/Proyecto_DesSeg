@@ -34,7 +34,7 @@ def validar_calificacion(valor):
         # Cuando el valor no es un número válido, se lanza una excepción ValueError.
         raise ValueError("El valor no es un número válido")
     # Se verifica si el número es NaN o Infinity; si es así, se lanza una excepción ValueError.
-    if numero.is_nan() or numero.is_infinite():
+    if numero.is_nan() or numero.is_infinite():#is_nan es para verificar si el número es "Not a Number" (NaN) y is_infinite para verificar si es infinito.
         raise ValueError("El valor no puede ser NaN o Infinity")
     # El número debe estar entre 0 y 100; si no lo está, se lanza una excepción ValueError.
     if numero < 0 or numero > 100:
